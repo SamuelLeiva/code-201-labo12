@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coffee Collection</title>
+    <link rel="stylesheet" href="./styles/index.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-container">
+        </div>
+    <main class="container">
+        <header class="header">
+            <h1 class="header-title">Our Collection</h1>
+            <p class="header-description">
+                Introducing our Coffee Collection, a selection of unique coffees
+                from different roast types and origins, expertly roasted in small
+                batches and shipped fresh weekly.
+            </p>
+            <div class="filter-buttons">
+                <!-- uso de propiedades data para el filtrado -->
+                <button class="filter-btn active" data-filter="all">All Products</button>
+                <button class="filter-btn" data-filter="available">Available Now</button>
+            </div>
+        </header>
+
+        <section class="coffee-gallery" id="coffee-gallery"></section>
+    </main>
+
+    <script src="/scripts/index.js"></script>
+</body>
+</html>
