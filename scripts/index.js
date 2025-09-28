@@ -5,14 +5,13 @@ const filterButtons = document.querySelectorAll(".filter-btn");
 
 let allCoffeeData = []; // Variable para almacenar los datos.
 
+const ACTIVATE_ERROR = true;
+
 function createCoffeeCard(coffee) {
   const isAvailable = coffee.available;
   const isPopular = coffee.popular;
   const hasRating = coffee.rating !== null;
 
-  // Rutas de las imágenes de estrella (se asume que deben incluir el nombre del repositorio
-  // si se despliega en GitHub Pages, pero se usan las rutas relativas aquí por simplicidad).
-  // NOTA: Si usas GitHub Pages, estas rutas deben ser corregidas: e.g., /CODE-201-labs-11/imgs/Star_fill.svg
   const STAR_FILLED_PATH = `/imgs/Star_fill.svg`;
   const STAR_EMPTY_PATH = `/imgs/Star.svg`;
 
@@ -139,22 +138,47 @@ function filterCoffee(filterType) {
 }
 
 // 1. Fetch de los datos
-fetch(GALLERY_URL)
-  .then((response) => {
-    if (!response.ok) {
-      throw new Error("Error al cargar los datos");
+async function loadCoffeeData() {
+    try {
+        // Activar error intencional
+        if (ACTIVATE_ERROR) {
+            throw new Error("Error intencional: Simulación de fallo de la API o del servidor.");
+        }
+        
+        // 1. Fetch de los datos
+        const response = await fetch(GALLERY_URL);
+
+        // Validar si la respuesta HTTP fue exitosa (código 200-299)
+        if (!response.ok) {
+            // Si el status es 404, 500, etc., lanza un error que será capturado por el catch.
+            throw new Error(`Fallo de la red o servidor: ${response.status} ${response.statusText}`);
+        }
+
+        const data = await response.json();
+
+        // Validar que los datos recibidos sean un array
+        if (!Array.isArray(data)) {
+            throw new Error("La respuesta de la API no es un formato de array válido.");
+        }
+
+        // Si todo es correcto, procesar los datos
+        allCoffeeData = data;
+        filterCoffee("all"); 
+
+    } catch (error) {
+        console.error("Hubo un error al cargar o procesar los datos.: ", error.message);
+        
+        // Mostrar un mensaje de error al usuario
+        galleryContainer.innerHTML = `
+            <div style="text-align: center; padding: 50px; background-color: #2c2f33; border-radius: 10px;">
+                <h2 style="color: #ED7474; margin-bottom: 10px;">¡Oops! Algo salió mal.</h2>
+                <p style="color: #6F757C;">No se pudieron cargar los productos de café. Por favor, inténtalo de nuevo más tarde.</p>
+            </div>
+        `;
     }
-    return response.json();
-  })
-  .then((data) => {
-    allCoffeeData = data;
-    filterCoffee("all"); // Mostrar todos los productos por defecto
-  })
-  .catch((error) => {
-    console.error("Hubo un error al fetchear los datos:", error);
-    galleryContainer.innerHTML =
-      '<p style="color:red; text-align:center;">No se pudieron cargar los productos de café.</p>';
-  });
+}
+
+loadCoffeeData();
 
 // 2. Agregar Eventos a los Botones de Filtrado
 filterButtons.forEach((button) => {
