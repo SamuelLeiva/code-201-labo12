@@ -14,8 +14,8 @@ function createCoffeeCard(coffee) {
   const isPopular = coffee.popular;
   const hasRating = coffee.rating !== null;
 
-  const STAR_FILLED_PATH = `${REPO_NAME}/imgs/Star_fill.svg`;
-  const STAR_EMPTY_PATH = `${REPO_NAME}/imgs/Star.svg`;
+  const STAR_FILLED_PATH = `/imgs/Star_fill.svg`;
+  const STAR_EMPTY_PATH = `/imgs/Star.svg`;
 
   // 1. Crear el elemento principal <div class="card">
   const card = document.createElement("div");
