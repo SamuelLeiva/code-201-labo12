@@ -5,7 +5,7 @@ const filterButtons = document.querySelectorAll(".filter-btn");
 
 let allCoffeeData = []; // Variable para almacenar los datos.
 
-const ACTIVATE_ERROR = true;
+const ACTIVATE_ERROR = false;
 
 function createCoffeeCard(coffee) {
   const isAvailable = coffee.available;
@@ -57,7 +57,7 @@ function createCoffeeCard(coffee) {
   // 3b. Precio <span>
   const price = document.createElement("span");
   price.classList.add("card-price");
-  price.textContent = `$${coffee.price}`;
+  price.textContent = `${coffee.price}`;
   details.appendChild(price);
 
   // 4. Crear el wrapper de rating y sold-out <div class="card-rating-wrapper">
