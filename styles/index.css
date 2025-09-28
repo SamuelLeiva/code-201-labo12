@@ -18,7 +18,7 @@ body {
   left: 0;
   width: 100%;
   height: 350px;
-  background: url("/imgs/bg-cafe.jpg") no-repeat center center;
+  background: url('/code201-labo12/imgs/bg-cafe.jpg') no-repeat center center;
   background-size: cover;
   z-index: -2;
 }

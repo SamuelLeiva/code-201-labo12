@@ -1,3 +1,5 @@
+const REPO_NAME = "code-201-labo12"; 
+
 const GALLERY_URL =
   "https://raw.githubusercontent.com/devchallenges-io/curriculum/refs/heads/main/4-frontend-libaries/challenges/group_1/data/simple-coffee-listing-data.json";
 const galleryContainer = document.getElementById("coffee-gallery");
@@ -12,8 +14,8 @@ function createCoffeeCard(coffee) {
   const isPopular = coffee.popular;
   const hasRating = coffee.rating !== null;
 
-  const STAR_FILLED_PATH = `/imgs/Star_fill.svg`;
-  const STAR_EMPTY_PATH = `/imgs/Star.svg`;
+  const STAR_FILLED_PATH = `${REPO_NAME}/imgs/Star_fill.svg`;
+  const STAR_EMPTY_PATH = `${REPO_NAME}/imgs/Star.svg`;
 
   // 1. Crear el elemento principal <div class="card">
   const card = document.createElement("div");
